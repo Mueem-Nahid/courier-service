@@ -1,0 +1,13 @@
+.card-thumbnail:hover {
+    transform: scale(1.02);
+    transition: 1s;
+}
+
+.my-img {
+    width: 100%;
+    height: 250px;
+}
+
+.icon {
+    color: goldenrod;
+}

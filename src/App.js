@@ -1,24 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import AuthProvider from './context/AuthProvider';
+import AboutUs from './Pages/AboutUs/AboutUs';
+import AddService from './Pages/AddService/AddService';
+import GetTheService from './Pages/GetTheService/GetTheService';
+import Footer from './Pages/Home/Footer/Footer';
+import Header from './Pages/Home/Header/Header';
+import Home from './Pages/Home/Home';
+import Login from './Pages/Login/Login';
+import ManageAllOrders from './Pages/ManageAllOrders/ManageAllOrders';
+import MyOrders from './Pages/MyOrders/MyOrders';
+import NotFound from './Pages/NotFound/NotFound';
+import User from './Pages/User/User';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+      <Header></Header>
+      <Switch>
+        <Route exact path="/">
+            <Home></Home>
+        </Route>
+        <Route exact path="/home">
+          <Home></Home>
+        </Route>
+        <Route exact path="/about-us">
+          <AboutUs></AboutUs>
+        </Route>
+        <PrivateRoute path="/get-the-service/:id">
+          <GetTheService></GetTheService>
+        </PrivateRoute>
+        <PrivateRoute path="/my-orders/user/:email">
+          <MyOrders></MyOrders>
+        </PrivateRoute>
+        <PrivateRoute path="/manage-orders">
+          <ManageAllOrders></ManageAllOrders>
+        </PrivateRoute>
+        <PrivateRoute path="/add-service">
+          <AddService></AddService>
+        </PrivateRoute>
+        <PrivateRoute path="/user">
+          <User></User>
+        </PrivateRoute>
+        <Route exact path="/login">
+          <Login></Login>
+        </Route>
+        <Route exact path="*">
+          <NotFound></NotFound>
+        </Route>
+      </Switch>
+      <Footer></Footer>
+      </BrowserRouter>
+    </AuthProvider>
+    
   );
 }
 
